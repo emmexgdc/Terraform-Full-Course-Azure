@@ -20,6 +20,13 @@ stages:
     pool:
       name: 'azureagent'
     steps: 
+
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          sudo apt-get update
+          sudo apt-get install -y unzip
     - task: TerraformInstaller@1
       inputs:
         terraformVersion: 'latest'
