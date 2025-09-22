@@ -123,9 +123,9 @@ stages:
             inlineScript: |
               az repos pr create \
                           --repository $(Build.Repository.Name) \
-                          --source-branch dev \
+                          --source-branch features \
                           --target-branch main \
-                          --title "Auto PR: dev → main" \
+                          --title "Auto PR: features → main" \
                           --description "CI pipeline opened this PR"
           
 
