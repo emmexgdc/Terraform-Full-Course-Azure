@@ -113,4 +113,21 @@ stages:
             commandOptions: '--auto-approve'
             environmentServiceNameAzureRM: 'Azure subscription 1(3a54638a-f7b3-4cd1-af13-7707b69b9ebe)'
 
+        - task: AzureCLI@2
+          displayName: create pr from features to main
+          condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/dev'))
+          inputs:
+            azureSubscription: 'Azure subscription 1(3a54638a-f7b3-4cd1-af13-7707b69b9ebe)'
+            scriptType: 'batch'
+            scriptLocation: 'inlineScript'
+            inlineScript: |
+              az repos pr create \
+                          --repository $(Build.Repository.Name) \
+                          --source-branch dev \
+                          --target-branch main \
+                          --title "Auto PR: dev → main" \
+                          --description "CI pipeline opened this PR"
+          
+
+
  
